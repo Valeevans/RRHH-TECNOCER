@@ -580,8 +580,7 @@ function namesMatch(a, b){
       if (w===lw || (w.length===1 && lw[0]===w) || (lw.length===1 && w[0]===lw)){
         used[i]=true; found=true; break;
       }
-    }
-    if (!found) return false;
+        if (!found) return false;
   }
   return true;
 };
