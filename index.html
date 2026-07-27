@@ -570,16 +570,22 @@ function namesMatch(a, b){
   const wb = normalizeName(b).split(' ').filter(Boolean);
   if (!wa.length || !wb.length) return false;
   if (wa.length > 3 || wb.length > 3) return false;
-  const [shorter, longer] = wa.length <= wb.length ? [wa, wb] : [wb, wa];
+  const shorter = wa.length <= wb.length ? wa : wb;
+  const longer = wa.length <= wb.length ? wb : wa;
   const used = new Array(longer.length).fill(false);
-  for (const w of shorter){
+  for (let s=0; s<shorter.length; s++){
+    const w = shorter[s];
     let found = false;
     for (let i=0; i<longer.length; i++){
       if (used[i]) continue;
       const lw = longer[i];
       if (w===lw || (w.length===1 && lw[0]===w) || (lw.length===1 && w[0]===lw)){
         used[i]=true; found=true; break;
-      }
+      }    }
+    if (!found) return false;
+  }
+  return true;
+}
         if (!found) return false;
   }
   return true;
