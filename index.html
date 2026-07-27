@@ -575,7 +575,6 @@ function namesMatch(a, b){
   const longer = wa.length <= wb.length ? wb : wa;
   return shorter.every(function(w){ return w.length>=4 && longer.indexOf(w)>=0; });
 }
-}
 function diasEntre(fechaIso){
   const hoy = new Date(); const f = new Date(fechaIso);
   return Math.round((hoy - f) / 86400000);
