@@ -570,9 +570,11 @@ function namesMatch(a, b){
   if (!na || !nb) return false;
   if (na === nb) return true;
   const wa = na.split(' '), wb = nb.split(' ');
-  if (wa.length > 3 || wb.length > 3) return false; // evita falsos positivos con grupos ("AUTOELEVADORISTAS", etc.)
-  const shared = wa.filter(w => w.length>=4 && wb.includes(w));
-  return shared.length>0;
+  if (wa.length > 3 || wb.length > 3) return false;
+  const shorter = wa.length <= wb.length ? wa : wb;
+  const longer = wa.length <= wb.length ? wb : wa;
+  return shorter.every(function(w){ return w.length>=4 && longer.indexOf(w)>=0; });
+}
 }
 function diasEntre(fechaIso){
   const hoy = new Date(); const f = new Date(fechaIso);
